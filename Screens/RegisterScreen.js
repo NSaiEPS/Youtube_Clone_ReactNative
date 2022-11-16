@@ -2,6 +2,9 @@ import { View, Text, useColorScheme, StyleSheet } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { Button, Image, Input } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+
 
 
 const RegisterScreen = ({navigation}) => {
@@ -70,6 +73,8 @@ const RegisterScreen = ({navigation}) => {
     
     },[])
 
+ 
+
     let [input,setInput]=useState({
       passwordToggle:true,
       name:'',
@@ -78,8 +83,38 @@ const RegisterScreen = ({navigation}) => {
 
      })
 
-    let handleRegister=()=>{
-        alert('login clicked')
+    let handleRegister=(e)=>{
+      if(!input.name){
+        alert('enter your name to register')
+
+      }
+
+      if(!input.email){
+        alert('enter your email to register')
+      }
+      if(!input.password){
+        alert('enter your password to register')
+      }
+
+      if(input.email && input.password && input.name){
+        e.preventDefault()
+        // console.log(input.name, input.email, input.password)
+      
+       
+        auth().createUserWithEmailAndPassword(input.email,input.password).then((userAuth)=>{
+          userAuth.user.updateProfile({
+            displayName:input.name,
+            
+          })
+          
+          navigation.replace("Home")
+
+        
+        }
+          )
+       .catch(error=>alert(error))
+      
+      }
     }
     return (
       <View style={styles.LoginScreenParent}>
@@ -131,7 +166,7 @@ const RegisterScreen = ({navigation}) => {
         }}
         />
 
-        <View style={{position:'absolute', right:35, top:10}}>
+        <View style={{position:'absolute', right:35, top:17}}>
         <Icon  
 onPress={()=>{
   setInput({
@@ -140,7 +175,7 @@ passwordToggle:!input.passwordToggle
 })
 }}
 
-name= {input.passwordToggle ? 'eye': 'eye-slash'} color='black'  size={25}/>
+name= {!input.passwordToggle ? 'eye': 'eye-slash'} color='black'  size={25}/>
         </View>
 
         </View>

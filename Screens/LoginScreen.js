@@ -1,13 +1,15 @@
 import { View, Text, useColorScheme, StyleSheet } from 'react-native'
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { Button, Image, Input } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import auth from '@react-native-firebase/auth';
+
 
 
 const LoginScreen = ({navigation}) => {
     const theme=useColorScheme()
 
-    useLayoutEffect(()=>{
+useLayoutEffect(()=>{
         navigation.setOptions({
             title:null,
             headerLeft:()=>(
@@ -70,6 +72,23 @@ const LoginScreen = ({navigation}) => {
     
     },[])
 
+
+    useEffect(()=>{
+ 
+
+      const subscriber= auth().onAuthStateChanged((authUser)=>{
+        // console.log(authUser?.email, 'loginScreen')
+        if(authUser){
+         
+   
+          navigation.replace("Home")
+       
+   
+        }
+       })
+      
+      return subscriber;
+       },[])
      let [input,setInput]=useState({
       passwordToggle:true,
       email:'',
@@ -77,8 +96,23 @@ const LoginScreen = ({navigation}) => {
 
      })
 
-    let handleLogin=()=>{
-        alert('login clicked')
+    let handleLogin=(e)=>{
+      if(!input.email){
+        alert('enter your email to login')
+      }
+      if(!input.password){
+        alert('enter your password to login')
+      }
+
+      if(input.email && input.password){
+      e.preventDefault();
+ 
+      auth().signInWithEmailAndPassword(input.email,input.password).then (userAuth=>{
+        setAuthChanged(true)
+        // navigation.replace("Home")
+       
+      })
+ .catch(error=>alert(error))}
     }
   return (
     <View style={styles.LoginScreenParent}>
@@ -122,7 +156,7 @@ const LoginScreen = ({navigation}) => {
         }}
         />
 
-        <View style={{position:'absolute', right:35, top:10}}>
+        <View style={{position:'absolute', right:35, top:17}}>
         <Icon  
 onPress={()=>{
   setInput({
@@ -131,7 +165,7 @@ passwordToggle:!input.passwordToggle
 })
 }}
 
-name= {input.passwordToggle ? 'eye': 'eye-slash'} color='black'  size={25}/>
+name= {!input.passwordToggle ? 'eye': 'eye-slash'} color='black'  size={25}/>
         </View>
 
         </View>
