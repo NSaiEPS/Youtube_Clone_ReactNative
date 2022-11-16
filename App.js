@@ -1,5 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
 
   Image,
@@ -8,9 +10,37 @@ import {
 
   View,
 } from 'react-native';
+import LoginScreen from './Screens/LoginScreen';
+import RegisterScreen from './Screens/RegisterScreen';
+import HomeScreen from './Screens/HomeScreen';
 
 
 
+const Stack = createNativeStackNavigator();
+
+// const colorScheme = Appearance.getColorScheme();
+// if (colorScheme === 'dark') {
+//   // Use dark color scheme
+//   alert("dark mode on")
+// }
+
+const globalScreenOptions={
+  headerStyle:{
+    backgroundColor:"#ffffff",
+    
+    
+
+  
+  },
+    headerTitleStyle:{
+      color:'white',
+      
+    },
+    headerTintColor:"white",
+    headerTitleAlign: 'center',
+   
+
+  }
 
 const App= () => {
   let [splashScreen,setsplashScreen]=useState(true)
@@ -59,9 +89,16 @@ if(splashScreen){
     </View>)
 }
   return (
-    <View>
-      <Text>Thank you Jesus for this..</Text>
-    </View>
+    <NavigationContainer>
+    <Stack.Navigator 
+    initialRouteName="Login" screenOptions={globalScreenOptions}>
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Register" component={RegisterScreen} />
+      <Stack.Screen name="Home" component={HomeScreen} />
+      {/* <Stack.Screen name="Tables" component={TablesInfoScreen} /> */}
+      {/* <Stack.Screen name="Admin" component={AdminDashBoard} /> */}
+    </Stack.Navigator>
+  </NavigationContainer>
   );
 };
 

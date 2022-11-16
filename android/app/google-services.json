@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "554458673627",
+    "project_id": "react-tailwind-rapidap",
+    "storage_bucket": "react-tailwind-rapidap.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554458673627:android:168660bafb75b46e8bb7fe",
+        "android_client_info": {
+          "package_name": "com.youtubeclonereactnative"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "554458673627-idhrkfe33g8l47ham51rbdbfdfa2m0jr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFWgWvF1oNbzUrVc-om6oYYsfBCxrblYI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "554458673627-idhrkfe33g8l47ham51rbdbfdfa2m0jr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
