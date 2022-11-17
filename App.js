@@ -14,6 +14,8 @@ import LoginScreen from './Screens/LoginScreen';
 import RegisterScreen from './Screens/RegisterScreen';
 import HomeScreen from './Screens/HomeScreen';
 import HistoryScreen from './Screens/HistoryScreen';
+import store from './Components/Redux/Store';
+import { Provider } from 'react-redux';
 
 
 
@@ -90,6 +92,7 @@ if(splashScreen){
     </View>)
 }
   return (
+    <Provider  store={store} >
     <NavigationContainer>
     <Stack.Navigator 
     initialRouteName="Login" screenOptions={globalScreenOptions}>
@@ -100,6 +103,7 @@ if(splashScreen){
       {/* <Stack.Screen name="Admin" component={AdminDashBoard} /> */}
     </Stack.Navigator>
   </NavigationContainer>
+  </Provider>
   );
 };
 

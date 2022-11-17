@@ -17,7 +17,7 @@ export const categories = [
     { name: 'Live', icon: <MaterialIcon  name='live-tv' color='white'  size={25}/>, },
     { name: 'Sport', icon: <MaterialIcon  name='fitness-center' color='white'  size={25}/>, },
     { name: 'Fashion', icon: <MaterialIcon  name='checkroom' color='white'  size={25}/>, },
-    { name: 'Beauty', icon:  <MaterialIcon  name='face-woman-shimmer' color='white'  size={25}/> },
+    { name: 'Beauty', icon:  <MaterialIcon  name='face-retouching-natural' color='white'  size={25}/> },
     { name: 'Comedy', icon: <MaterialIcon  name='theater-comedy' color='white'  size={25}/>, },
     { name: 'Gym', icon: <MaterialIcon  name='fitness-center' color='white'  size={25}/>, },
     { name: 'Crypto', icon: <MaterialIcon  name='developer-mode' color='white'  size={25}/> },

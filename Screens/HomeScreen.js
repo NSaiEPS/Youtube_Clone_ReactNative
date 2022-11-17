@@ -3,6 +3,7 @@ import React, { useLayoutEffect, useRef, useState } from 'react'
 import Header from '../Components/Header'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import SideBar from '../Components/SideBar';
+import VideoCart from '../Components/VideoCart';
 
 
 const HomeScreen = ({navigation}) => {
@@ -61,6 +62,8 @@ let handleScroll=(e)=>{
       sidebarmoreContent={sidebarmoreContent}
       />
       </View>
+{
+  !sidebarmoreContent &&
 
       <View style={[styles.ontouchScroll,{
 
@@ -72,17 +75,23 @@ let handleScroll=(e)=>{
         </Text>
         </TouchableOpacity>
 
-      </View>
+      </View>}
 
       <View>
         {sidebarmoreContent ?
-        <View>
+        <View style={styles.sidebarComponenent}>
           <SideBar />
           </View>:
-          <View>
-      <Text>HomeScreen</Text>
 
-            </View>}
+
+          <View style={styles.homeScreen}>
+      <VideoCart/>
+
+            </View>
+            
+            
+            
+            }
       </View>
     </SafeAreaView>
   )
@@ -110,4 +119,10 @@ const styles = StyleSheet.create({
     // alignSelf:'center'
 
   },
+  sidebarComponenent:{
+    marginBottom:100
+  },
+  homeScreen:{
+    backgroundColor:"black"
+  }
 })

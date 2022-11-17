@@ -141,7 +141,8 @@ name='search' color='white'  size={25}/>
         }
         activeOpacity={0.7}
         titleStyle={{
-          color:'#070124'
+          color:'#070124',
+          fontWeight:'900'
         }}
         containerStyle={{
           backgroundColor:'white'

@@ -9,11 +9,11 @@ const SideBar = () => {
       <FlatList 
          data={categories}
        
-         keyExtractor={item => item.id}
+         keyExtractor={item => Math.random()}
          renderItem={({item,})=>{
           // console.log(item)
          return(
-          <View>
+          <View key={Math.random()}>
             <SideBarComponent  item={item}/>
             </View>
          )}}
