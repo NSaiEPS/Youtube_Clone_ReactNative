@@ -72,6 +72,7 @@ useLayoutEffect(()=>{
     
     },[])
 
+    let [authChabged,setAuthChanged]=useState(false)
 
     useEffect(()=>{
  
@@ -114,6 +115,24 @@ useLayoutEffect(()=>{
       })
  .catch(error=>alert(error))}
     }
+
+    useEffect(()=>{
+ 
+
+      const subscriber= auth().onAuthStateChanged((authUser)=>{
+        // console.log(authUser?.email, 'loginScreen')
+        if(authUser){
+         
+   
+          navigation.replace("Home")
+         
+   
+        }
+       })
+      
+      return subscriber;
+       },[authChabged])
+       
   return (
     <View style={styles.LoginScreenParent}>
         <View style={styles.LoginScreenParentInside}>

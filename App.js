@@ -13,6 +13,7 @@ import {
 import LoginScreen from './Screens/LoginScreen';
 import RegisterScreen from './Screens/RegisterScreen';
 import HomeScreen from './Screens/HomeScreen';
+import HistoryScreen from './Screens/HistoryScreen';
 
 
 
@@ -95,7 +96,7 @@ if(splashScreen){
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Register" component={RegisterScreen} />
       <Stack.Screen name="Home" component={HomeScreen} />
-      {/* <Stack.Screen name="Tables" component={TablesInfoScreen} /> */}
+      <Stack.Screen name="History" component={HistoryScreen} />
       {/* <Stack.Screen name="Admin" component={AdminDashBoard} /> */}
     </Stack.Navigator>
   </NavigationContainer>
