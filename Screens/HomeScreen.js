@@ -1,9 +1,11 @@
 import { Platform, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import React, { useLayoutEffect, useReducer, useRef, useState } from 'react'
 import Header from '../Components/Header'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import SideBar from '../Components/SideBar';
 import VideoCart from '../Components/VideoCart';
+import { useSelector } from 'react-redux';
+import { SelectThemeAction } from '../Components/Redux copy/Redux_Slice';
 
 
 const HomeScreen = ({navigation}) => {
@@ -15,7 +17,9 @@ const HomeScreen = ({navigation}) => {
 
 const scrollRef = useRef();
 const [scrolToTopCheck, setscrolToTopCheck]=useState(false)
-
+// let selectReducer=useSelector(state=>state.info.state)
+// console.log(selectReducer)
+let selectThemeAction=useSelector(SelectThemeAction)
 
 const onPressTouch = () => {
   
@@ -84,8 +88,11 @@ let handleScroll=(e)=>{
           </View>:
 
 
-          <View style={styles.homeScreen}>
-      <VideoCart/>
+          <View style={[,styles.homeScreen,{
+            backgroundColor:selectThemeAction ?'white':'black'
+            
+          }]}>
+      <VideoCart navigation={navigation}/>
 
             </View>
             
@@ -123,6 +130,6 @@ const styles = StyleSheet.create({
     marginBottom:100
   },
   homeScreen:{
-    backgroundColor:"black"
+    // backgroundColor:"black"
   }
 })

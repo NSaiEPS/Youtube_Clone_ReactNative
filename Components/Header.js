@@ -6,12 +6,21 @@ import ArrowLeftIcon from 'react-native-vector-icons/AntDesign';
 import TimeIcon from 'react-native-vector-icons/Entypo';
 import { Avatar, Button, Input } from 'react-native-elements';
 import auth from '@react-native-firebase/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { SelectThemeAction, themeAction } from './Redux copy/Redux_Slice';
 
 
 
 
 const Header = ({navigation,sidebarmoreContent,setsidebarmoreContent}) => {
   // let [sidebarmoreContent,setsidebarmoreContent]=useState(false)
+// let selectReducer=useSelector(state=>state.info.state)
+// console.log(selectReducer)
+// let selectTheme=useSelector(state=>state?.info?.themeWhite)
+// console.log(selectTheme)
+let selectThemeAction=useSelector(SelectThemeAction)
+let dispatch=useDispatch()
+
   let [input, setInput]=useState({
     moreSearch:false,
     inputText:'',
@@ -21,7 +30,7 @@ const Header = ({navigation,sidebarmoreContent,setsidebarmoreContent}) => {
 
   // console.log(auth()?._user?.displayName[0].toUpperCase())
 
-  let handleLogin=()=>{
+  let handleLogout=()=>{
 
     Alert.alert('Warning','Are you sure to Logout!',[
 
@@ -43,6 +52,33 @@ const Header = ({navigation,sidebarmoreContent,setsidebarmoreContent}) => {
 
    
   }
+
+  let handleDarkTheme=()=>{
+    // alert('dark')
+    dispatch(
+      themeAction(
+         false
+       
+    
+       )
+    
+     )
+    
+}
+
+let handleLightTheme=()=>{
+    // alert('whitew')
+    dispatch(  themeAction(
+      true
+    
+ 
+    )
+      )
+  
+    
+
+}
+
   return (
     <View style={styles.header}>
       {!input.moreSearch ?
@@ -76,14 +112,14 @@ onPress={()=>{
 name='search' color='white'  size={25}/>
         </View>
         <View style={styles.headerInsideModes}>
-          <View style={{flexDirection:'row',}}>
+          <View style={{flexDirection:'row',justifyContent:'center'}}>
 
         <Avatar
          size={27}
         rounded 
         // title="MD"
-        onPress={() => 
-          alert('clicked for light mode')
+        onPress={
+          handleLightTheme
 
         }
         activeOpacity={0.7}
@@ -91,7 +127,9 @@ name='search' color='white'  size={25}/>
           color:'#070124'
         }}
         containerStyle={{
-          backgroundColor:'white',
+          backgroundColor:selectThemeAction? 'yellow':'white',
+
+          marginRight:4
           // size:25
         }}
         />
@@ -101,24 +139,26 @@ name='search' color='white'  size={25}/>
 
         rounded 
         // title="MD"
-        onPress={() => 
-       alert('clicked for dark mode')
-        }
+        onPress={handleDarkTheme}
         activeOpacity={0.7}
         titleStyle={{
           color:'#070124'
         }}
         containerStyle={{
-          backgroundColor:'white'
+          // backgroundColor:'white',
+          backgroundColor:selectThemeAction? 'black':'yellow',
+          borderColor:'white',
+          borderWidth:0.5
         }}
         />
         </View>
         <View style={{marginTop:-5}}>
 
         <Text style={{
-          color:'white'
+          color:'white',
+          textAlign:"center"
         }}>
-          mode say
+          {selectThemeAction ? 'light mode':'dark mode'}
         </Text>
         </View>
         </View>
@@ -154,7 +194,7 @@ input.userMoreInfo &&
         <View style={styles.avatarMoreInfo}>
           <Button 
           title='Logout'
-          onPress={handleLogin}
+          onPress={handleLogout}
           containerStyle={{
             marginTop:5,
             width:'95%',
@@ -253,6 +293,7 @@ const styles = StyleSheet.create({
   header:{
     borderBottomColor:'white',
     backgroundColor:'#070124',
+    zIndex:3
     // backgroundColor:'white'
 
   },
@@ -294,7 +335,8 @@ const styles = StyleSheet.create({
     borderColor:'white',
     borderWidth:1,
     height:40,
-    alignSelf:'center'
+    alignSelf:'center',
+    width:85
 
   },
   avatarMoreInfo:{
@@ -308,6 +350,8 @@ const styles = StyleSheet.create({
     borderWidth:1,
     display:'flex',
     // justifyContent:'center',
-    alignContent:'space-between'
+    alignContent:'space-between',
+    // zIndex:3,
+    
   }
 })

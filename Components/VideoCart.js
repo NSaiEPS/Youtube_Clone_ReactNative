@@ -1,12 +1,17 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { Image } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/AntDesign';
 
 
-const VideoCart = () => {
+const VideoCart = ({navigation}) => {
   return (
-    <View style={styles.videoCart}>
+    <TouchableOpacity style={styles.videoCart}
+    onPress={()=>{
+        navigation.navigate('Watching')
+    }}
+    
+    >
       <View>
         <View>
             <Image
@@ -38,11 +43,17 @@ const VideoCart = () => {
                 video details
             </Text>
         </View>
-        <View style={{flexDirection:'row', height:25}}>
+        <TouchableOpacity
+         onPress={()=>{
+            navigation.navigate('Channel')
+        }}
+        style={{flexDirection:'row', height:25}}>
             <View>
 
          
-        <Text style={styles.videoCartChannelmoreInfo}>
+        <Text style={styles.videoCartChannelmoreInfo}
+        
+        >
                 Channel Name
             </Text>
             </View>
@@ -57,7 +68,7 @@ const VideoCart = () => {
 </View>
 
 
-        </View>
+        </TouchableOpacity>
         <View>
         <Text style={styles.videoCartChannelmoreInfo}>
         date
@@ -66,7 +77,7 @@ const VideoCart = () => {
         </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 

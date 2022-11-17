@@ -14,8 +14,11 @@ import LoginScreen from './Screens/LoginScreen';
 import RegisterScreen from './Screens/RegisterScreen';
 import HomeScreen from './Screens/HomeScreen';
 import HistoryScreen from './Screens/HistoryScreen';
-import store from './Components/Redux/Store';
+// import store from './Components/Redux/Store';
 import { Provider } from 'react-redux';
+import { Store } from './Components/Redux copy/Store';
+import WatchingScreen from './Screens/WatchingScreen';
+import ChaneelScreen from './Screens/ChaneelScreen';
 
 
 
@@ -73,7 +76,7 @@ if(splashScreen){
         
       }}>
     <Image 
-  source={require('./Constants/YouTube_SPlashScreeen..jpg')}
+  source={require('./Common/YouTube_SPlashScreeen..jpg')}
   // source={require('./Constants/splash.jpg')}
     style={{
       width:'100%',
@@ -92,7 +95,7 @@ if(splashScreen){
     </View>)
 }
   return (
-    <Provider  store={store} >
+    <Provider  store={Store} >
     <NavigationContainer>
     <Stack.Navigator 
     initialRouteName="Login" screenOptions={globalScreenOptions}>
@@ -100,6 +103,8 @@ if(splashScreen){
       <Stack.Screen name="Register" component={RegisterScreen} />
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="History" component={HistoryScreen} />
+      <Stack.Screen name="Watching" component={WatchingScreen} />
+      <Stack.Screen name="Channel" component={ChaneelScreen} />
       {/* <Stack.Screen name="Admin" component={AdminDashBoard} /> */}
     </Stack.Navigator>
   </NavigationContainer>

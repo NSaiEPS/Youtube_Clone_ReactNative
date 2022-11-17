@@ -24,6 +24,7 @@ export default function actionReducer(state=InitialState, action) {
         }
 
         case 'Themes':{
+            alert(action.payload)
             return{
                 ...state,
                 themeWhite:action.payload
