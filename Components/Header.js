@@ -18,6 +18,7 @@ const Header = ({navigation,sidebarmoreContent,setsidebarmoreContent,history}) =
 // console.log(selectReducer)
 // let selectTheme=useSelector(state=>state?.info?.themeWhite)
 // console.log(selectTheme)
+// console.log(auth()?._user?.email)
 let selectThemeAction=useSelector(SelectThemeAction)
 let dispatch=useDispatch()
 
@@ -192,7 +193,8 @@ name='search' color='white'  size={25}/>
 
 input.userMoreInfo &&
         <View style={[styles.avatarMoreInfo,{
-           height: history ? 50:100,
+           height: history ? 55:100,
+           borderRadius:10
         }]}>
           <Button 
           title='Logout'

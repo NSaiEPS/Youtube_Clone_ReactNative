@@ -1,24 +1,64 @@
 import { Platform, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useLayoutEffect, useReducer, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useReducer, useRef, useState } from 'react'
 import Header from '../Components/Header'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import SideBar from '../Components/SideBar';
 import VideoCart from '../Components/VideoCart';
-import { useSelector } from 'react-redux';
-import { SelectThemeAction } from '../Components/Redux copy/Redux_Slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { SelectThemeAction, usersDataAction } from '../Components/Redux copy/Redux_Slice';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 
 
 const HomeScreen = ({navigation}) => {
   useLayoutEffect(()=>{
     navigation.setOptions({headerShown: false})
   },[])
+
+  let dispatch=useDispatch()
+let userEmail=auth()?._user?.email
+
+
+
+  const [usersData, setusersdata] = useState([])
+  useEffect(() => {
+   
+    firestore().collection('users').onSnapshot((data)=>{
+      setusersdata((data.docs.map((item)=>({
+        id:item.id,
+        data:item.data()
+      }
+      ))))
+    })
+   
+  }, [])
+
+
+  // console.log(userss?.email)
+
+
+usersData.map((data)=>
+{
+  if(data?.data?.email===userEmail){
+    dispatch(
+      usersDataAction({
+        userid:(data.id),
+        userName:(data.data?.name),
+        userEmail:(data.data?.email)
+      })
+    )
+
+  }
+
+})
+
+
   let [sidebarmoreContent,setsidebarmoreContent]=useState(false)
 
 
 const scrollRef = useRef();
 const [scrolToTopCheck, setscrolToTopCheck]=useState(false)
-// let selectReducer=useSelector(state=>state.info.state)
-// console.log(selectReducer)
+
 let selectThemeAction=useSelector(SelectThemeAction)
 
 const onPressTouch = () => {

@@ -22,6 +22,9 @@ export const ReduxSlice=createSlice({
         selectCategoryAction:(state,action)=>{
             state.selectCategory=action.payload
         },
+        usersDataAction:(state,action)=>{
+            state.usersData=action.payload
+        },
       
       
       
@@ -31,10 +34,11 @@ export const ReduxSlice=createSlice({
 })
 
 
-export const {themeAction,selectCategoryAction,}=ReduxSlice.actions;
+export const {themeAction,selectCategoryAction,usersDataAction}=ReduxSlice.actions;
 
 export const SelectThemeAction=(state)=>state.reduxstore.themeWhite
 export const SelectCategoryAction=(state)=>state.reduxstore.selectCategory
+export const SelectUserData=(state)=>state.reduxstore.usersData
 
 
 

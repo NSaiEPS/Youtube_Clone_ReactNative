@@ -11,7 +11,7 @@ const History = ({navigation}) => {
   let [sidebarmoreContent,setsidebarmoreContent]=useState(false)
 
   return (
-    <View style={{height:500}}>
+    <View style={{height:'100%'}}>
    <Header navigation={navigation}
       setsidebarmoreContent={setsidebarmoreContent}
       sidebarmoreContent={sidebarmoreContent}
@@ -38,4 +38,8 @@ const History = ({navigation}) => {
 
 export default History
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  sidebarComponenent:{
+    marginBottom:50
+  }
+})
