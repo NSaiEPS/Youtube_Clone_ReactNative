@@ -12,7 +12,7 @@ import { SelectThemeAction, themeAction } from './Redux copy/Redux_Slice';
 
 
 
-const Header = ({navigation,sidebarmoreContent,setsidebarmoreContent}) => {
+const Header = ({navigation,sidebarmoreContent,setsidebarmoreContent,history}) => {
   // let [sidebarmoreContent,setsidebarmoreContent]=useState(false)
 // let selectReducer=useSelector(state=>state.info.state)
 // console.log(selectReducer)
@@ -191,7 +191,9 @@ name='search' color='white'  size={25}/>
 {
 
 input.userMoreInfo &&
-        <View style={styles.avatarMoreInfo}>
+        <View style={[styles.avatarMoreInfo,{
+           height: history ? 50:100,
+        }]}>
           <Button 
           title='Logout'
           onPress={handleLogout}
@@ -202,6 +204,7 @@ input.userMoreInfo &&
             marginRight:'auto'
           }}
           />
+          {!history &&
           <Button 
            containerStyle={{
             marginTop:5,
@@ -241,7 +244,7 @@ name='back-in-time' color='white'  size={25}/>
             navigation.navigate('History')
           }}
 
-          />
+          />}
           </View>}
         </View>
       </View>
@@ -341,10 +344,10 @@ const styles = StyleSheet.create({
   },
   avatarMoreInfo:{
     position:'absolute',
-    top:40,
+    top:45,
     width:150,
     right:0,
-    height:100,
+   
     backgroundColor:'#070124',
     borderColor:'white',
     borderWidth:1,
