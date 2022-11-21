@@ -1,8 +1,25 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { selectCategoryAction, sideBarOpenAction } from './Redux copy/Redux_Slice'
 
 const SideBarComponent = ({item}) => {
+    let dispatch=useDispatch()
+    let handlePress=()=>{
+        // alert(item.name)
+        dispatch(
+        selectCategoryAction(item.name),
+        )
+
+        dispatch(
+        sideBarOpenAction(false)
+
+        )
+    }
   return (
+    <TouchableOpacity
+    onPress={handlePress}
+    >
     <View style={styles.sideBarComponent}>
      <View style={styles.sideBarComponentInside}>
     <View>
@@ -14,6 +31,7 @@ const SideBarComponent = ({item}) => {
     </View>
    </View>
     </View>
+    </TouchableOpacity>
   )
 }
 

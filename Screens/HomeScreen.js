@@ -5,9 +5,10 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import SideBar from '../Components/SideBar';
 import VideoCart from '../Components/VideoCart';
 import { useDispatch, useSelector } from 'react-redux';
-import { SelectThemeAction, usersDataAction } from '../Components/Redux copy/Redux_Slice';
+import { SelectCategoryAction, SelectSideBarOpen, SelectThemeAction, usersDataAction } from '../Components/Redux copy/Redux_Slice';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import { fetchFromAPI } from '../Components/FetchAPI';
 
 
 const HomeScreen = ({navigation}) => {
@@ -60,6 +61,7 @@ const scrollRef = useRef();
 const [scrolToTopCheck, setscrolToTopCheck]=useState(false)
 
 let selectThemeAction=useSelector(SelectThemeAction)
+let selectSideBarOpen=useSelector(SelectSideBarOpen)
 
 const onPressTouch = () => {
   
@@ -88,6 +90,26 @@ let handleScroll=(e)=>{
   }
 
 }
+
+
+let SelectedName=useSelector(SelectCategoryAction)
+
+const [videos,setVideos]=useState([])
+
+useEffect(()=>{
+  fetchFromAPI(`search?part=snippet&q=${
+    SelectedName
+  }`).then((data)=>
+    setVideos(
+      data.items
+    )
+  )
+  },[SelectedName])
+
+  // console.log(videos,SelectedName)
+
+
+
   return (
     <SafeAreaView>
          {
@@ -102,12 +124,11 @@ let handleScroll=(e)=>{
       <View>
 
       <Header navigation={navigation}
-      setsidebarmoreContent={setsidebarmoreContent}
-      sidebarmoreContent={sidebarmoreContent}
+  
       />
       </View>
 {
-  !sidebarmoreContent &&
+  !selectSideBarOpen &&
 
       <View style={[styles.ontouchScroll,{
 
@@ -122,7 +143,7 @@ let handleScroll=(e)=>{
       </View>}
 
       <View>
-        {sidebarmoreContent ?
+        {selectSideBarOpen ?
         <View style={styles.sidebarComponenent}>
           <SideBar />
           </View>:
@@ -132,7 +153,7 @@ let handleScroll=(e)=>{
             backgroundColor:selectThemeAction ?'white':'black'
             
           }]}>
-      <VideoCart navigation={navigation}/>
+      <VideoCart navigation={navigation} videos={videos}/>
 
             </View>
             

@@ -8,7 +8,8 @@ export const ReduxSlice=createSlice({
         selectCategory:'New',
         name:'',
         usersData:{},
-        themeWhite:false
+        themeWhite:false,
+        sideBarOpen:false
        
         
 
@@ -25,6 +26,9 @@ export const ReduxSlice=createSlice({
         usersDataAction:(state,action)=>{
             state.usersData=action.payload
         },
+        sideBarOpenAction:(state,action)=>{
+            state.sideBarOpen=action.payload
+        },
       
       
       
@@ -34,11 +38,12 @@ export const ReduxSlice=createSlice({
 })
 
 
-export const {themeAction,selectCategoryAction,usersDataAction}=ReduxSlice.actions;
+export const {themeAction,selectCategoryAction,usersDataAction,sideBarOpenAction}=ReduxSlice.actions;
 
 export const SelectThemeAction=(state)=>state.reduxstore.themeWhite
 export const SelectCategoryAction=(state)=>state.reduxstore.selectCategory
 export const SelectUserData=(state)=>state.reduxstore.usersData
+export const SelectSideBarOpen=(state)=>state.reduxstore.sideBarOpen
 
 
 

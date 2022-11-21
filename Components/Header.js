@@ -7,12 +7,12 @@ import TimeIcon from 'react-native-vector-icons/Entypo';
 import { Avatar, Button, Input } from 'react-native-elements';
 import auth from '@react-native-firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
-import { SelectThemeAction, themeAction } from './Redux copy/Redux_Slice';
+import { SelectSideBarOpen, SelectThemeAction, sideBarOpenAction, themeAction } from './Redux copy/Redux_Slice';
 
 
 
 
-const Header = ({navigation,sidebarmoreContent,setsidebarmoreContent,history}) => {
+const Header = ({navigation,history}) => {
   // let [sidebarmoreContent,setsidebarmoreContent]=useState(false)
 // let selectReducer=useSelector(state=>state.info.state)
 // console.log(selectReducer)
@@ -20,6 +20,8 @@ const Header = ({navigation,sidebarmoreContent,setsidebarmoreContent,history}) =
 // console.log(selectTheme)
 // console.log(auth()?._user?.email)
 let selectThemeAction=useSelector(SelectThemeAction)
+let selectSideBarOpen=useSelector(SelectSideBarOpen)
+
 let dispatch=useDispatch()
 
   let [input, setInput]=useState({
@@ -91,11 +93,11 @@ let handleLightTheme=()=>{
         >
         <Icon  
 onPress={()=>{
-  setsidebarmoreContent(!sidebarmoreContent)
+ dispatch(sideBarOpenAction(!selectSideBarOpen))
 
 }}
 
-name= {!sidebarmoreContent ? 'reorder-horizontal': 'align-horizontal-distribute'} color='white'  size={25}/>
+name= {!selectSideBarOpen ? 'reorder-horizontal': 'align-horizontal-distribute'} color='white'  size={25}/>
         </View>
         <View style={{
           alignSelf:'center'

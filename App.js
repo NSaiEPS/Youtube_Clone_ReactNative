@@ -132,3 +132,10 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
+
+
+// Need to add moment js to calculate date,(Serahc & watch history)
+// Wideo to watch youtube video
+// Need to add audio to text converter to header
+// Model to searching in header
