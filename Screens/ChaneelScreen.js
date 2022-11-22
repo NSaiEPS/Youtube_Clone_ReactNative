@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux'
 
 const ChaneelScreen = ({navigation,route}) => {
   const {id}=route.params;
-  console.log(id)
+  // console.log(id)
   useLayoutEffect(()=>{
     navigation.setOptions({headerShown: false})
 
@@ -58,6 +58,7 @@ let selectThemeAction=useSelector(SelectThemeAction)
 
          <View style={[styles.chaneelScreenMain,{
           // backgroundColor: selectThemeAction ?'white':'black'
+          borderColor: selectThemeAction ?'black':'white',
 
          }]}>
           <View>
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
     marginRight:'auto',
     height:350,
     marginVertical:10,
-    borderColor:'white',
+  
     borderWidth:1
   },
   chaneelScreenMainText:{
