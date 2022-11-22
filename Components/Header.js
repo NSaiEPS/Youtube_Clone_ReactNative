@@ -97,7 +97,7 @@ onPress={()=>{
 
 }}
 
-name= {!selectSideBarOpen ? 'reorder-horizontal': 'align-horizontal-distribute'} color='white'  size={25}/>
+name= {!selectSideBarOpen ? 'reorder-horizontal': 'align-horizontal-distribute'} color='white'  size={30}/>
         </View>
         <View style={{
           alignSelf:'center'
@@ -112,7 +112,7 @@ onPress={()=>{
 
 }}
 
-name='search' color='white'  size={25}/>
+name='search' color='white'  size={30}/>
         </View>
         <View style={styles.headerInsideModes}>
           <View style={{flexDirection:'row',justifyContent:'center'}}>
@@ -268,11 +268,13 @@ onPress={()=>{
 
 }}
 
-name= 'arrowleft' color='white'  size={25}/>
+name= 'arrowleft' color='white'  size={30}/>
         </View>
         <View style={{
           width:'95%',
-          paddingVertical:5
+          // paddingVertical:5
+          // paddingTop:'auto'
+          alignSelf:'center'
 
         }}>
          
@@ -311,7 +313,7 @@ const styles = StyleSheet.create({
     marginLeft:'auto',
     marginRight:"auto",
     justifyContent:'space-between',
-    height:50,
+    height:75,
 
 
   },
@@ -325,7 +327,7 @@ const styles = StyleSheet.create({
     marginLeft:'auto',
     marginRight:'auto',
     // backgroundColor:'red',
-    height:50,
+    height:75,
     // paddingVertical:5
     // padding:5
     
@@ -333,7 +335,8 @@ const styles = StyleSheet.create({
   headerInsideMoreSearchInput:{
    
     width:'95%',
-    backgroundColor:'white'
+    backgroundColor:'white',
+    
 
 
   },

@@ -4,11 +4,15 @@ import Header from '../Components/Header'
 import SideBar from '../Components/SideBar'
 import { fetchFromAPI } from '../Components/FetchAPI'
 import VideoCart from '../Components/VideoCart'
+import { SelectSideBarOpen } from '../Components/Redux copy/Redux_Slice'
+import { useSelector } from 'react-redux'
 
 
 const WatchingScreen = ({navigation,route}) => {
   const {id}=route.params;
-  console.log(id)
+  // console.log(id)
+  let selectSideBarOpen=useSelector(SelectSideBarOpen)
+
 
   useLayoutEffect(()=>{
     navigation.setOptions({headerShown: false})
@@ -40,11 +44,10 @@ const WatchingScreen = ({navigation,route}) => {
   return (
     <View>
       <Header navigation={navigation}
-      setsidebarmoreContent={setsidebarmoreContent}
-      sidebarmoreContent={sidebarmoreContent}
+   
       />
 
-{sidebarmoreContent &&
+{selectSideBarOpen &&
         <View style={styles.sidebarComponenent}>
           <SideBar />
           </View>}

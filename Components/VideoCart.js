@@ -221,7 +221,8 @@ VChtitle={ items?.snippet?.channelTitle}
                  
         <TouchableOpacity
          onPress={()=>{
-            navigation.navigate('Channel')
+            navigation.navigate('Channel',{
+                id:(items?.snippet?.channelId)})
         }}
         style={{flexDirection:'row', height:25}}>
             <View>
