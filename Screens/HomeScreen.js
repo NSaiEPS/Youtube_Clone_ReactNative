@@ -127,7 +127,7 @@ useEffect(()=>{
   
       />
       </View>
-{
+{/* {
   !selectSideBarOpen &&
 
       <View style={[styles.ontouchScroll,{
@@ -140,7 +140,7 @@ useEffect(()=>{
         </Text>
         </TouchableOpacity>
 
-      </View>}
+      </View>} */}
 
       <View>
         {selectSideBarOpen ?
