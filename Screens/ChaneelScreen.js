@@ -4,7 +4,9 @@ import Header from '../Components/Header'
 import SideBar from '../Components/SideBar'
 
 
-const ChaneelScreen = ({navigation}) => {
+const ChaneelScreen = ({navigation,route}) => {
+  const {id}=route.params;
+  console.log(id)
   useLayoutEffect(()=>{
     navigation.setOptions({headerShown: false})
 

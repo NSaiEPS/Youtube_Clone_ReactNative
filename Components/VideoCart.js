@@ -9,9 +9,9 @@ const VideoCart = ({navigation,videos}) => {
     
   return (
     <TouchableOpacity style={styles.videoCart}
-    onPress={()=>{
-        navigation.navigate('Watching')
-    }}
+    // onPress={()=>{
+    //     navigation.navigate('Watching')
+    // }}
     
     >
       {/* <View>
@@ -81,11 +81,11 @@ const VideoCart = ({navigation,videos}) => {
       </View> */}
 
 
-<ScrollView>
+{/* <ScrollView> */}
 
       {videos?.map((items,index)=>{
             let reqdate=(items?.snippet?.publishTime).split('T')[0]
-          //  console.log(items)
+        //    console.log(items?.id?.videoId)
           
             
             return(
@@ -116,7 +116,8 @@ VChtitle={ items?.snippet?.channelTitle}
 
                 <TouchableOpacity
                 onPress={()=>{
-                    navigation.navigate('Channel')
+                    navigation.navigate('Channel',{
+                        id:(items?.id?.channelId)})
                 }}
                 >
 
@@ -172,7 +173,10 @@ VChtitle={ items?.snippet?.channelTitle}
 
               <TouchableOpacity
               onPress={()=>{
-                navigation.navigate('Watching')
+                navigation.navigate('Watching',{
+                    id:(items?.id?.videoId)
+
+                })
             }}
               >
                <View>
@@ -259,7 +263,7 @@ VChtitle={ items?.snippet?.channelTitle}
                     </TouchableOpacity>}
                 </View>
         )})}
-</ScrollView>
+{/* </ScrollView> */}
 
 
 

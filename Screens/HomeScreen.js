@@ -1,4 +1,4 @@
-import { Platform, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Platform, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useLayoutEffect, useReducer, useRef, useState } from 'react'
 import Header from '../Components/Header'
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -148,7 +148,7 @@ useEffect(()=>{
           <SideBar />
           </View>:
 
-
+<ScrollView>
           <View style={[,styles.homeScreen,{
             backgroundColor:selectThemeAction ?'white':'black'
             
@@ -156,6 +156,7 @@ useEffect(()=>{
       <VideoCart navigation={navigation} videos={videos}/>
 
             </View>
+            </ScrollView>
             
             
             
