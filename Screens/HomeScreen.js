@@ -66,6 +66,7 @@ let selectSideBarOpen=useSelector(SelectSideBarOpen)
 let selectModelOpen=useSelector(SelectModelOpen)
 
 const onPressTouch = () => {
+  // alert('clicked')
   
   scrollRef.current?.scrollTo({
     y: 0,
@@ -125,16 +126,11 @@ useEffect(()=>{
 
       <View>
 
-      <Header navigation={navigation}
-  
-      />
+      <Header navigation={navigation}/>
       </View>
-{/* {
-  !selectSideBarOpen &&
 
-      <View style={[styles.ontouchScroll,{
 
-      }]}   >
+      <View style={[styles.ontouchScroll,{ }]}   >
         <TouchableOpacity onPress={onPressTouch}>
         <Text style={{alignSelf:'center', color:'red'}} >
           
@@ -142,15 +138,15 @@ useEffect(()=>{
         </Text>
         </TouchableOpacity>
 
-      </View>} */}
+      </View>
 
       <View>
-        {selectSideBarOpen ?
+        {/* {selectSideBarOpen ?
         <View style={styles.sidebarComponenent}>
           <SideBar />
-          </View>:
+          </View>: */}
 
-<ScrollView>
+<ScrollView ref={scrollRef} onScroll={handleScroll}>
           <View style={[,styles.homeScreen,{
             backgroundColor:selectThemeAction ?'white':'black'
             
@@ -162,7 +158,7 @@ useEffect(()=>{
             
             
             
-            }
+            {/* } */}
       </View>
 
 
@@ -207,7 +203,8 @@ const styles = StyleSheet.create({
     display:'flex',
     // alignContent:'center',
     justifyContent:'center',
-    // alignSelf:'center'
+    // alignSelf:'center',
+    // marginBottom:250
 
   },
   sidebarComponenent:{

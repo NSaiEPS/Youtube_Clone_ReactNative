@@ -11,18 +11,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { modelOpenAction, selectCategoryAction, SelectSideBarOpen, SelectThemeAction, sideBarOpenAction, themeAction } from './Redux copy/Redux_Slice';
 import { categories } from '../Common/Constants';
 
-
+import { useRoute } from '@react-navigation/native';
 
 
 const Header = ({navigation,history}) => {
+  const route = useRoute();
+  // console.log(route.name);
   // let [sidebarmoreContent,setsidebarmoreContent]=useState(false)
 // let selectReducer=useSelector(state=>state.info.state)
 // console.log(selectReducer)
 // let selectTheme=useSelector(state=>state?.info?.themeWhite)
 // console.log(selectTheme)
 // console.log(auth()?._user?.email)
-let selectThemeAction=useSelector(SelectThemeAction)
-let selectSideBarOpen=useSelector(SelectSideBarOpen)
+// let selectThemeAction=useSelector(SelectThemeAction)
+// let selectSideBarOpen=useSelector(SelectSideBarOpen)
 
 let dispatch=useDispatch()
 
@@ -35,58 +37,60 @@ let dispatch=useDispatch()
 
   // console.log(auth()?._user?.displayName[0].toUpperCase())
 
-  let handleLogout=()=>{
+  // let handleLogout=()=>{
 
-    Alert.alert('Warning','Are you sure to Logout!',[
+  //   Alert.alert('Warning','Are you sure to Logout!',[
 
-      {text:"Yes",
-      onPress:()=>{ auth().signOut().then(()=>{
-        navigation.replace("Login")
-      })},
-      style:'cancel'
-      },
-      {text:"No",
-      // onPress:()=>alert('Cancelled deleting'),
-      style:'default'
-      },
+  //     {text:"Yes",
+  //     onPress:()=>{ auth().signOut().then(()=>{
+  //       navigation.replace("Login")
+  //     })},
+  //     style:'cancel'
+  //     },
+  //     {text:"No",
+  //     // onPress:()=>alert('Cancelled deleting'),
+  //     style:'default'
+  //     },
       
       
-      ],
-      {cancelable:true}
-          )
+  //     ],
+  //     {cancelable:true}
+  //         )
 
    
-  }
+  // }
 
-  let handleDarkTheme=()=>{
-    // alert('dark')
-    dispatch(
-      themeAction(
-         false
+//   let handleDarkTheme=()=>{
+//     // alert('dark')
+//     dispatch(
+//       themeAction(
+//          false
        
     
-       )
+//        )
     
-     )
+//      )
     
-}
+// }
 
-let handleLightTheme=()=>{
-    // alert('whitew')
-    dispatch(  themeAction(
-      true
-    )
-      )
+// let handleLightTheme=()=>{
+//     // alert('whitew')
+//     dispatch(  themeAction(
+//       true
+//     )
+//       )
   
     
 
-}
+// }
 
 let handlePressMoreOptions=(val)=>{
     // alert(item.name)
     dispatch(
     selectCategoryAction(val),
     )
+    if(route.name!=='Home'){
+    navigation.navigate('Home')}
 
     // dispatch(
     // sideBarOpenAction(false)
@@ -348,7 +352,7 @@ name= 'arrowleft' color='white'  size={30}/>
     >
     <View style={styles.sideBarComponent}>
      <View style={styles.sideBarComponentInside}>
-    <View>
+    <View >
         {item.icon}
 
     </View>
@@ -441,7 +445,12 @@ const styles = StyleSheet.create({
   },
   sideBarComponent:{
     backgroundColor:'#070124',
-    marginTop:3
+    // marginTop:3,
+    borderColor:'white',
+    borderWidth:1,
+    marginLeft:5,
+    borderRadius:25,
+    marginBottom:5
 
 },
 sideBarComponentInside:{
@@ -450,12 +459,13 @@ sideBarComponentInside:{
     // width:'65%',
     // marginLeft:"auto",
     // marginRight:"auto",
-    padding:7
+    padding:5
 },
 sideBarComponentInsideText:{
     color:'white',
     fontWeight:'700',
     fontSize:17,
+    marginLeft:5
 
 }
 })

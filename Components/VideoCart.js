@@ -90,7 +90,9 @@ const VideoCart = ({navigation,videos}) => {
             
             return(
             <View key={items?.snippet?.publishTime}
-            style={styles.videoCartInsideMap}
+            style={[styles.videoCartInsideMap,{
+                marginBottom:index+1===videos.length ? 100:0
+            }]}
           
             
             
