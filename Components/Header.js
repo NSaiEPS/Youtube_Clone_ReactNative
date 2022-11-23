@@ -1,13 +1,15 @@
-import { Alert, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Alert, FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import SearchIcon from 'react-native-vector-icons/Ionicons';
 import ArrowLeftIcon from 'react-native-vector-icons/AntDesign';
 import TimeIcon from 'react-native-vector-icons/Entypo';
-import { Avatar, Button, Input } from 'react-native-elements';
+import YouTubeIcon from 'react-native-vector-icons/Entypo';
+import { Avatar, Button, Image, Input } from 'react-native-elements';
 import auth from '@react-native-firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
-import { modelOpenAction, SelectSideBarOpen, SelectThemeAction, sideBarOpenAction, themeAction } from './Redux copy/Redux_Slice';
+import { modelOpenAction, selectCategoryAction, SelectSideBarOpen, SelectThemeAction, sideBarOpenAction, themeAction } from './Redux copy/Redux_Slice';
+import { categories } from '../Common/Constants';
 
 
 
@@ -80,22 +82,52 @@ let handleLightTheme=()=>{
 
 }
 
+let handlePressMoreOptions=(val)=>{
+    // alert(item.name)
+    dispatch(
+    selectCategoryAction(val),
+    )
+
+    // dispatch(
+    // sideBarOpenAction(false)
+
+    // )
+}
+
   return (
     <View style={styles.header}>
       {!input.moreSearch ?
      
       <View style={styles.headerInside}>
         <View style={{
-          alignSelf:'center'
+          alignSelf:'center',
+          flexDirection:'row'
         }}
         >
-        <Icon  
+        {/* <Icon  
 onPress={()=>{
  dispatch(sideBarOpenAction(!selectSideBarOpen))
 
 }}
 
-name= {!selectSideBarOpen ? 'reorder-horizontal': 'align-horizontal-distribute'} color='white'  size={30}/>
+name= {!selectSideBarOpen ? 'reorder-horizontal': 'align-horizontal-distribute'} color='white'  size={30}/> */}
+   <View
+    // style={{backgroundColor:'white',height:30,alignSelf:'stretch'}}
+    >
+   <YouTubeIcon  
+
+
+name='youtube' color='red'  size={30} />
+</View>
+<View style={{alignSelf:'center', marginLeft:5}}>
+  <Text style={{
+    color:'white',
+    fontSize:17,
+    fontWeight:'700'
+  }}>
+    YouTube
+  </Text>
+  </View>
         </View>
 
 
@@ -114,7 +146,7 @@ onPress={()=>{
 
 }}
 
-name='ios-search-outline' color='white'  size={30}/>
+name='ios-search-outline' color='white'  size={27}/>
         </View>
         {/* <View style={styles.headerInsideModes}>
           <View style={{flexDirection:'row',justifyContent:'center'}}>
@@ -299,6 +331,39 @@ name= 'arrowleft' color='white'  size={30}/>
           />
         </View>
       </View> }
+
+      <View>
+      <FlatList 
+         data={categories}
+       
+         keyExtractor={item => Math.random()}
+         horizontal={true}
+         renderItem={({item,})=>{
+          // console.log(item)
+         return(
+          <View key={Math.random()}>
+           <TouchableOpacity
+    onPress={()=>{
+      handlePressMoreOptions(item.name)}}
+    >
+    <View style={styles.sideBarComponent}>
+     <View style={styles.sideBarComponentInside}>
+    <View>
+        {item.icon}
+
+    </View>
+    <View>
+        <Text style={styles.sideBarComponentInsideText}>{item.name}</Text>
+    </View>
+   </View>
+    </View>
+    </TouchableOpacity>
+           
+            </View>
+         )}}
+       
+      />
+      </View>
     </View>
   )
 }
@@ -373,5 +438,24 @@ const styles = StyleSheet.create({
   },
   headerInsideRight:{
     flexDirection:'row'
-  }
+  },
+  sideBarComponent:{
+    backgroundColor:'#070124',
+    marginTop:3
+
+},
+sideBarComponentInside:{
+    flexDirection:'row',
+    // alignSelf:'center'
+    // width:'65%',
+    // marginLeft:"auto",
+    // marginRight:"auto",
+    padding:7
+},
+sideBarComponentInsideText:{
+    color:'white',
+    fontWeight:'700',
+    fontSize:17,
+
+}
 })
