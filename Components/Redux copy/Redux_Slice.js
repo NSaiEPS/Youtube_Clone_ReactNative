@@ -9,7 +9,8 @@ export const ReduxSlice=createSlice({
         name:'',
         usersData:{},
         themeWhite:false,
-        sideBarOpen:false
+        sideBarOpen:false,
+        modelOpen:false
        
         
 
@@ -17,8 +18,8 @@ export const ReduxSlice=createSlice({
     },
 
     reducers:{
-        themeAction:(state,action)=>{
-            state.themeWhite=action.payload
+        themeAction:(state,{payload})=>{
+            state.themeWhite=payload
         },
         selectCategoryAction:(state,action)=>{
             state.selectCategory=action.payload
@@ -29,6 +30,10 @@ export const ReduxSlice=createSlice({
         sideBarOpenAction:(state,action)=>{
             state.sideBarOpen=action.payload
         },
+        modelOpenAction:(state,{payload})=>{
+            state.modelOpen=payload
+        },
+      
       
       
       
@@ -38,12 +43,13 @@ export const ReduxSlice=createSlice({
 })
 
 
-export const {themeAction,selectCategoryAction,usersDataAction,sideBarOpenAction}=ReduxSlice.actions;
+export const {themeAction,selectCategoryAction,usersDataAction,sideBarOpenAction,modelOpenAction}=ReduxSlice.actions;
 
 export const SelectThemeAction=(state)=>state.reduxstore.themeWhite
 export const SelectCategoryAction=(state)=>state.reduxstore.selectCategory
 export const SelectUserData=(state)=>state.reduxstore.usersData
 export const SelectSideBarOpen=(state)=>state.reduxstore.sideBarOpen
+export const SelectModelOpen=(state)=>state.reduxstore.modelOpen
 
 
 

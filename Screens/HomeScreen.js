@@ -1,14 +1,15 @@
-import { Platform, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Modal, Platform, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useLayoutEffect, useReducer, useRef, useState } from 'react'
 import Header from '../Components/Header'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import SideBar from '../Components/SideBar';
 import VideoCart from '../Components/VideoCart';
 import { useDispatch, useSelector } from 'react-redux';
-import { SelectCategoryAction, SelectSideBarOpen, SelectThemeAction, usersDataAction } from '../Components/Redux copy/Redux_Slice';
+import { modelOpenAction, SelectCategoryAction, SelectModelOpen, SelectSideBarOpen, SelectThemeAction, usersDataAction } from '../Components/Redux copy/Redux_Slice';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import { fetchFromAPI } from '../Components/FetchAPI';
+import UserSettings from '../Components/UserSettings';
 
 
 const HomeScreen = ({navigation}) => {
@@ -62,6 +63,7 @@ const [scrolToTopCheck, setscrolToTopCheck]=useState(false)
 
 let selectThemeAction=useSelector(SelectThemeAction)
 let selectSideBarOpen=useSelector(SelectSideBarOpen)
+let selectModelOpen=useSelector(SelectModelOpen)
 
 const onPressTouch = () => {
   
@@ -162,6 +164,26 @@ useEffect(()=>{
             
             }
       </View>
+
+
+<Modal
+visible={selectModelOpen}
+transparent
+
+animationType='slide'
+
+hardwareAccelerated
+onRequestClose={()=>{
+  dispatch(modelOpenAction(false))
+  
+
+}}
+>
+<UserSettings navigation={navigation}/>
+
+</Modal>
+     
+
     </SafeAreaView>
   )
 }
@@ -193,5 +215,7 @@ const styles = StyleSheet.create({
   },
   homeScreen:{
     // backgroundColor:"black"
-  }
+  },
+
+
 })

@@ -1,13 +1,13 @@
 import { Alert, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useState } from 'react'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import SearchIcon from 'react-native-vector-icons/FontAwesome';
+import SearchIcon from 'react-native-vector-icons/Ionicons';
 import ArrowLeftIcon from 'react-native-vector-icons/AntDesign';
 import TimeIcon from 'react-native-vector-icons/Entypo';
 import { Avatar, Button, Input } from 'react-native-elements';
 import auth from '@react-native-firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
-import { SelectSideBarOpen, SelectThemeAction, sideBarOpenAction, themeAction } from './Redux copy/Redux_Slice';
+import { modelOpenAction, SelectSideBarOpen, SelectThemeAction, sideBarOpenAction, themeAction } from './Redux copy/Redux_Slice';
 
 
 
@@ -73,8 +73,6 @@ let handleLightTheme=()=>{
     // alert('whitew')
     dispatch(  themeAction(
       true
-    
- 
     )
       )
   
@@ -99,8 +97,12 @@ onPress={()=>{
 
 name= {!selectSideBarOpen ? 'reorder-horizontal': 'align-horizontal-distribute'} color='white'  size={30}/>
         </View>
+
+
+        <View style={styles.headerInsideRight}>
         <View style={{
-          alignSelf:'center'
+          alignSelf:'center',
+          marginRight:15
         }}
         >
         <SearchIcon  
@@ -112,9 +114,9 @@ onPress={()=>{
 
 }}
 
-name='search' color='white'  size={30}/>
+name='ios-search-outline' color='white'  size={30}/>
         </View>
-        <View style={styles.headerInsideModes}>
+        {/* <View style={styles.headerInsideModes}>
           <View style={{flexDirection:'row',justifyContent:'center'}}>
 
         <Avatar
@@ -164,23 +166,26 @@ name='search' color='white'  size={30}/>
           {selectThemeAction ? 'light mode':'dark mode'}
         </Text>
         </View>
-        </View>
+        </View> */}
     
         <View style={{
           alignSelf:'center',
-          position:'relative'
+          position:'relative',
+          marginRight:10
         }}
         >
         <Avatar
          size="small"
         rounded 
         title={`${auth()?._user?.displayName[0].toUpperCase()}`}
-        onPress={() => 
+        onPress={() => {
         setInput({
           ...input,
           userMoreInfo:!input.userMoreInfo
           
         })
+
+        dispatch(modelOpenAction(true))}
         }
         activeOpacity={0.7}
         titleStyle={{
@@ -191,7 +196,7 @@ name='search' color='white'  size={30}/>
           backgroundColor:'white'
         }}
         />
-{
+{/* {
 
 input.userMoreInfo &&
         <View style={[styles.avatarMoreInfo,{
@@ -249,7 +254,9 @@ name='back-in-time' color='white'  size={25}/>
           }}
 
           />}
-          </View>}
+          </View>} */}
+        </View>
+
         </View>
       </View>
 :
@@ -363,5 +370,8 @@ const styles = StyleSheet.create({
     alignContent:'space-between',
     // zIndex:3,
     
+  },
+  headerInsideRight:{
+    flexDirection:'row'
   }
 })
