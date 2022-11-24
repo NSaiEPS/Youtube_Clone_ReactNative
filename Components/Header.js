@@ -8,7 +8,7 @@ import YouTubeIcon from 'react-native-vector-icons/Entypo';
 import { Avatar, Button, Image, Input } from 'react-native-elements';
 import auth from '@react-native-firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
-import { modelOpenAction, selectCategoryAction, SelectSideBarOpen, SelectThemeAction, sideBarOpenAction, themeAction } from './Redux copy/Redux_Slice';
+import { modelOpenAction, SelectCategoryAction, selectCategoryAction, SelectSideBarOpen, SelectThemeAction, sideBarOpenAction, themeAction } from './Redux copy/Redux_Slice';
 import { categories } from '../Common/Constants';
 
 import { useRoute } from '@react-navigation/native';
@@ -27,6 +27,8 @@ const Header = ({navigation,history}) => {
 // let selectSideBarOpen=useSelector(SelectSideBarOpen)
 
 let dispatch=useDispatch()
+let SelectedName=useSelector(SelectCategoryAction)
+
 
   let [input, setInput]=useState({
     moreSearch:false,
@@ -118,10 +120,32 @@ name= {!selectSideBarOpen ? 'reorder-horizontal': 'align-horizontal-distribute'}
    <View
     // style={{backgroundColor:'white',height:30,alignSelf:'stretch'}}
     >
-   <YouTubeIcon  
+   {/* <YouTubeIcon  
 
 
-name='youtube' color='red'  size={30} />
+name='youtube' color='red'  size={30} /> */}
+<Image
+            source={require('../Common/youtubeIcon.png')}
+            containerStyle={{
+                width:45,
+                // height:400,
+                // marginLeft:'auto',
+                alignSelf:'center',
+
+
+                
+                
+            }}
+            style={{
+                resizeMode:'contain',
+                height:45,
+           
+                alignSelf:'center',
+               
+
+            }}
+            
+            />
 </View>
 <View style={{alignSelf:'center', marginLeft:5}}>
   <Text style={{
@@ -350,14 +374,24 @@ name= 'arrowleft' color='white'  size={30}/>
     onPress={()=>{
       handlePressMoreOptions(item.name)}}
     >
-    <View style={styles.sideBarComponent}>
+    <View style={[styles.sideBarComponent,{
+    backgroundColor:SelectedName=== (item.name) ?'white':'#070124',
+
+
+    }]}>
      <View style={styles.sideBarComponentInside}>
     <View >
+      <Text style={{
+        color:SelectedName!== (item.name) ?'white':'#070124',
+      }}>
         {item.icon}
+        </Text>
 
     </View>
     <View>
-        <Text style={styles.sideBarComponentInsideText}>{item.name}</Text>
+        <Text style={[styles.sideBarComponentInsideText,{
+          color:SelectedName=== (item.name) ?'black':'white',
+        }]}>{item.name}</Text>
     </View>
    </View>
     </View>
@@ -445,6 +479,7 @@ const styles = StyleSheet.create({
   },
   sideBarComponent:{
     backgroundColor:'#070124',
+    // backgroundColor:'red',
     // marginTop:3,
     borderColor:'white',
     borderWidth:1,

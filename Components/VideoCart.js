@@ -2,10 +2,13 @@ import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-nati
 import React from 'react'
 import { Image } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/AntDesign';
+import { useSelector } from 'react-redux';
+import { SelectThemeAction } from './Redux copy/Redux_Slice';
 
 
 const VideoCart = ({navigation,videos}) => {
     // console.log(videos.length)
+    let selectThemeAction=useSelector(SelectThemeAction)
     
   return (
     <TouchableOpacity style={styles.videoCart}
@@ -91,7 +94,9 @@ const VideoCart = ({navigation,videos}) => {
             return(
             <View key={items?.snippet?.publishTime}
             style={[styles.videoCartInsideMap,{
-                marginBottom:index+1===videos.length ? 100:0
+                marginBottom:index+1===videos.length ? 100:0,
+                borderColor:  !selectThemeAction ?'white':'black',
+                borderBottomWidth:index+1===videos.length ? 0:1,
             }]}
           
             
@@ -155,14 +160,19 @@ VChtitle={ items?.snippet?.channelTitle}
            alignSelf:'center'
         }}>
                        <Text style={[styles.videoCartDiscription,{
-                        textAlign:'center'}]
+                        textAlign:'center',
+    color:!selectThemeAction ?'white':'black'
+                    
+                    }]
 
                        }>
                         {(items?.snippet?.title.slice(0,50))}
                        
                        </Text>   
                        <Text style={[styles.videoCartChannelmoreInfo,{
-                        textAlign:'center'
+                        textAlign:'center',
+    color:!selectThemeAction ?'white':'black'
+
                        }]}>
                         {reqdate}</Text>   
                         </View>
@@ -210,7 +220,9 @@ VChtitle={ items?.snippet?.channelTitle}
                 video details
             </Text> */}
 
-            <Text style={styles.videoCartDiscription}>
+            <Text style={[styles.videoCartDiscription,{
+                color:!selectThemeAction ?'white':'black'
+            }]}>
                   {(items?.snippet?.title.slice(0,60))}
                   
                 </Text>
@@ -230,7 +242,10 @@ VChtitle={ items?.snippet?.channelTitle}
             <View>
 
          
-        <Text style={styles.videoCartChannelmoreInfo}
+        <Text style={[styles.videoCartChannelmoreInfo,{
+    color:!selectThemeAction ?'white':'black'
+
+        }]}
         
         >
                  {
@@ -257,7 +272,10 @@ VChtitle={ items?.snippet?.channelTitle}
 
 
                                  <View>
-        <Text style={styles.videoCartChannelmoreInfo}>
+        <Text style={[styles.videoCartChannelmoreInfo,{
+    color:!selectThemeAction ?'white':'black'
+
+        }]}>
         {reqdate}
       </Text>
 
@@ -281,22 +299,24 @@ const styles = StyleSheet.create({
         width:'95%',
         marginLeft:'auto',
         marginRight:'auto',
-        backgroundColor:'#102041',
+        // backgroundColor:'#102041',
         marginTop:7,
         borderWidth:1,
         borderColor:'white',
         marginBottom:150
     },
     videoCartDiscription:{
-        color:'white',
+        // color:'white',
         fontSize:18,
         fontWeight:'700'
     },
     videoCartChannelmoreInfo:{
-        color:'#ffffff90',
+        // color:'#ffffff90',
         fontSize:17
     },
     videoCartInsideMap:{
         marginTop:10,
+        borderBottomWidth:1,
+        paddingBottom:10
     }
 })
